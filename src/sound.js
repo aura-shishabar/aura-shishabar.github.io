@@ -1,6 +1,6 @@
 // src/sound.js — real recorded page-flip sound.
-// Source: Mixkit "Page turn single" (Mixkit Free License — commercial use, no attribution).
-const SRC = new URL('../assets/page-flip.mp3', import.meta.url).href;
+// Source: Mixkit "Big paper page turn" (Mixkit Free License — commercial use, no attribution).
+const SRC = new URL('../assets/page-flip.mp3?v=2', import.meta.url).href;
 
 // Warm the HTTP cache so the first flip plays instantly.
 try {
