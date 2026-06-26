@@ -1,4 +1,6 @@
 // src/flip.js — wires StPageFlip (CDN global) to the rendered pages.
+import { playFlip } from './sound.js';
+
 export function initFlipbook(bookEl, pagesHtml, opts = {}) {
   bookEl.innerHTML = pagesHtml.join('');
   const PF = (window.St && window.St.PageFlip) ? window.St.PageFlip : window.PageFlip;
@@ -13,6 +15,7 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     usePortrait: single, mobileScrollSupport: true, drawShadow: false, flippingTime: 600
   });
   pf.loadFromHTML(bookEl.querySelectorAll('.page'));
+  pf.on('changeState', (e) => { if (e.data === 'flipping') playFlip(); });
   let lock = false;
   bookEl.addEventListener('wheel', (e) => {
     e.preventDefault();
