@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA — Flip Sound Test</title>
+<style>
+  :root{--gold:#e6c878;--ring:rgba(205,163,73,.5)}
+  *{box-sizing:border-box}
+  body{margin:0;background:#0c0a08;color:#f4eddf;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:26px 16px 40px}
+  h1{color:var(--gold);font-size:22px;letter-spacing:2px;margin:4px 0 6px}
+  p{color:#b3aa99;font-size:14px;text-align:center;max-width:420px;margin:0 0 20px;line-height:1.5}
+  .grid{width:100%;max-width:420px;display:flex;flex-direction:column;gap:12px}
+  button{appearance:none;cursor:pointer;text-align:left;background:#15120d;color:#f4eddf;
+    border:1px solid var(--ring);border-radius:14px;padding:16px 18px;font-size:16px;font-weight:600;
+    display:flex;align-items:center;gap:14px;transition:background .15s,transform .1s}
+  button:active{transform:scale(.98);background:#241c12}
+  button .num{width:30px;height:30px;flex:none;border-radius:50%;background:var(--gold);color:#1a140a;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  button .sub{display:block;font-size:12px;color:#b3aa99;font-weight:400;margin-top:2px}
+  .vol{margin-top:22px;display:flex;align-items:center;gap:10px;font-size:13px;color:#b3aa99;width:100%;max-width:420px}
+  .vol input{flex:1}
+  .now{margin-top:14px;font-size:13px;color:var(--gold);min-height:18px}
+</style>
+</head>
+<body>
+  <h1>FLIP SOUND TEST</h1>
+  <p>Tap each one to hear it. Tell me the <b>number</b> you like best — I'll wire it into the menu.</p>
+  <div class="grid">
+    <button data-src="https://assets.mixkit.co/active_storage/sfx/1104/1104-preview.mp3" data-name="Page turn — single"><span class="num">1</span><span>Page turn — single<span class="sub">light, quick single page</span></span></button>
+    <button data-src="https://assets.mixkit.co/active_storage/sfx/1101/1101-preview.mp3" data-name="Single book paging"><span class="num">2</span><span>Single book paging<span class="sub">crisp book page</span></span></button>
+    <button data-src="https://assets.mixkit.co/active_storage/sfx/1103/1103-preview.mp3" data-name="Stiff paper book paging"><span class="num">3</span><span>Stiff paper book paging<span class="sub">firmer / thicker paper</span></span></button>
+    <button data-src="https://assets.mixkit.co/active_storage/sfx/1105/1105-preview.mp3" data-name="Big paper page turn"><span class="num">4</span><span>Big paper page turn<span class="sub">fuller, heavier (you said no — here anyway)</span></span></button>
+    <button data-src="https://assets.mixkit.co/active_storage/sfx/1099/1099-preview.mp3" data-name="Browsing book by pages"><span class="num">5</span><span>Browsing book by pages<span class="sub">riffle through several pages</span></span></button>
+    <button data-src="https://assets.mixkit.co/active_storage/sfx/1102/1102-preview.mp3" data-name="Browsing book paging"><span class="num">6</span><span>Browsing book paging<span class="sub">another multi-page riffle</span></span></button>
+  </div>
+  <div class="vol"><span>Volume</span><input id="vol" type="range" min="0" max="100" value="60"><span id="volval">60%</span></div>
+  <div class="now" id="now"></div>
+<script>
+  var vol = document.getElementById('vol'), volval = document.getElementById('volval'), now = document.getElementById('now');
+  vol.addEventListener('input', function(){ volval.textContent = vol.value + '%'; });
+  document.querySelectorAll('button[data-src]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var a = new Audio(b.getAttribute('data-src'));
+      a.volume = vol.value / 100;
+      a.play().catch(function(){});
+      now.textContent = '▶ ' + b.getAttribute('data-name');
+    });
+  });
+</script>
+</body>
+</html>
