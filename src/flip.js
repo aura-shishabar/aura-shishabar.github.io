@@ -12,7 +12,7 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
   const ph = Math.round(pw * 1.5);
   const pf = new PF(bookEl, {
     width: pw, height: ph, size: 'fixed', showCover: true,
-    usePortrait: single, mobileScrollSupport: true, drawShadow: false, flippingTime: 600
+    usePortrait: single, mobileScrollSupport: false, drawShadow: false, flippingTime: 600
   });
   pf.loadFromHTML(bookEl.querySelectorAll('.page'));
 

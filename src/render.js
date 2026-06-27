@@ -4,9 +4,9 @@ export function escapeHtml(s) {
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-const MEDI = '<img class="medi-logo" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
-const LOGO_BIG = '<img class="logo logo-lg" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
-const LOGO_SM = '<img class="logo logo-sm" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
+const MEDI = '<img class="medi-logo" src="assets/logo.jpeg?v=2" alt="AURA Shishabar">';
+const LOGO_BIG = '<img class="logo logo-lg" src="assets/logo.jpeg?v=2" alt="AURA Shishabar">';
+const LOGO_SM = '<img class="logo logo-sm" src="assets/logo.jpeg?v=2" alt="AURA Shishabar">';
 
 function imgFor(url, name, cls, w, h) {
   if (!url) return '';

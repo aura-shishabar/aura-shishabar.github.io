@@ -4,8 +4,8 @@ import { fetchSheetCsv } from './sheet.js';
 import { parseCsv } from './csv.js';
 import { buildMenu } from './model.js';
 import { pickColumns, splitTopRemainder } from './layout.js';
-import { renderPages } from './render.js?v=4';
-import { initFlipbook } from './flip.js?v=3';
+import { renderPages } from './render.js?v=5';
+import { initFlipbook } from './flip.js?v=5';
 
 async function loadMenu() {
   if (CONFIG.sheetId) {
