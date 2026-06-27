@@ -2,7 +2,7 @@
   "categories": [
     {
       "Name": "SHISHA",
-      "PhotoURL": "https://loremflickr.com/600/900/hookah,shisha/all?lock=1",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/shisha.jpg",
       "Price": "16€",
       "PriceNote": "Neuer Kopf 9€",
       "Layout": "flavors",
@@ -10,7 +10,7 @@
     },
     {
       "Name": "COCKTAILS",
-      "PhotoURL": "https://loremflickr.com/600/900/cocktail/all?lock=2",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/cocktails.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -18,7 +18,7 @@
     },
     {
       "Name": "MOCKTAILS",
-      "PhotoURL": "https://loremflickr.com/600/900/mocktail,lemonade/all?lock=3",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/mocktails.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -26,7 +26,7 @@
     },
     {
       "Name": "HEISSE GETRÄNKE",
-      "PhotoURL": "https://loremflickr.com/600/900/coffee,latte/all?lock=4",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/hot-drinks.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -34,7 +34,7 @@
     },
     {
       "Name": "KALTE GETRÄNKE",
-      "PhotoURL": "https://loremflickr.com/600/900/soda,softdrink/all?lock=5",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/cold-drinks.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -42,7 +42,7 @@
     },
     {
       "Name": "SÄFTE",
-      "PhotoURL": "https://loremflickr.com/600/900/juice,orange/all?lock=6",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/juices.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -50,7 +50,7 @@
     },
     {
       "Name": "BIERE",
-      "PhotoURL": "https://loremflickr.com/600/900/beer/all?lock=7",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/beer.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -58,7 +58,7 @@
     },
     {
       "Name": "APERITIFS",
-      "PhotoURL": "https://loremflickr.com/600/900/aperol,spritz/all?lock=8",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/aperitifs.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -66,7 +66,7 @@
     },
     {
       "Name": "SHOTS",
-      "PhotoURL": "https://loremflickr.com/600/900/shots,bar/all?lock=9",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/shots.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -74,7 +74,7 @@
     },
     {
       "Name": "LONGDRINKS",
-      "PhotoURL": "https://loremflickr.com/600/900/whiskey,cocktail/all?lock=10",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/longdrinks.jpg",
       "Price": "",
       "PriceNote": "mit Cola oder Red Bull · inkl. Vodka & Gin",
       "Layout": "list",
@@ -82,7 +82,7 @@
     },
     {
       "Name": "FLASCHEN",
-      "PhotoURL": "https://loremflickr.com/600/900/whiskey,bottle/all?lock=11",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/bottles.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
@@ -90,7 +90,7 @@
     },
     {
       "Name": "SEKT & WEIN",
-      "PhotoURL": "https://loremflickr.com/600/900/wine,champagne/all?lock=12",
+      "PhotoURL": "https://aura-shishabar.github.io/assets/photos/wine.jpg",
       "Price": "",
       "PriceNote": "",
       "Layout": "list",
