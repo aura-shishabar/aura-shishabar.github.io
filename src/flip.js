@@ -16,17 +16,19 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
   });
   pf.loadFromHTML(bookEl.querySelectorAll('.page'));
 
-  // Fix StPageFlip 2.0.7 portrait backward-flip. The engine's flipPrev grabs the fold at
-  // x:10, assuming the page block starts at x=0. That holds in landscape (rect.left===0) but
-  // not in portrait (rect.left<0), so on mobile the backward fold starts off-page and the
-  // page slides in instead of folding. Mirror flipNext's geometry by adding rect.left.
-  // In landscape rect.left===0, so this is identical to the original (no desktop regression).
-  // Guarded: no-ops if the (version-pinned) internals ever change.
-  const fc = pf.flipController;
-  if (fc && fc.render && typeof fc.flip === 'function') {
-    fc.flipPrev = function (corner) {
-      const r = this.render.getRect();
-      this.flip({ x: r.left + 10, y: corner === 'top' ? 1 : r.height - 2 });
+  // Fix StPageFlip 2.0.7 portrait backward-flip "slide". In portrait + BACK the engine's
+  // HTMLRender.drawBottomPage() deliberately skips drawing the page underneath the turning
+  // page, so on mobile the incoming page has nothing to fold over and just wipes in from the
+  // left. Override it to always draw the bottom page (the way forward and landscape already
+  // do), so a backward turn folds like a forward turn. Only the portrait+back path changes;
+  // method/property names are pinned to page-flip@2.0.7 and guarded so a future bump no-ops.
+  const render = pf.getRender && pf.getRender();
+  if (render && typeof render.drawBottomPage === 'function') {
+    render.drawBottomPage = function () {
+      if (this.bottomPage === null) return;
+      const density = this.flippingPage != null ? this.flippingPage.getDrawingDensity() : null;
+      this.bottomPage.getElement().style.zIndex = (this.getSettings().startZIndex + 3).toString(10);
+      this.bottomPage.draw(density);
     };
   }
 
