@@ -1,6 +1,6 @@
 :root{--gold:#cda349;--gold-lt:#e6c878;--warm:#f4eddf;--muted:#b3aa99;--ring:rgba(205,163,73,.6)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:#070605;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+html,body{margin:0;height:100%;overflow:hidden;background:#070605;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 body{display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:14px 8px 26px}
 #bookwrap{width:100%;max-width:880px;display:flex;justify-content:center}
 #book{margin:0 auto}
