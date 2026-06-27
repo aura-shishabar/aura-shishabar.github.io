@@ -15,6 +15,21 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     usePortrait: single, mobileScrollSupport: true, drawShadow: false, flippingTime: 600
   });
   pf.loadFromHTML(bookEl.querySelectorAll('.page'));
+
+  // Fix StPageFlip 2.0.7 portrait backward-flip. The engine's flipPrev grabs the fold at
+  // x:10, assuming the page block starts at x=0. That holds in landscape (rect.left===0) but
+  // not in portrait (rect.left<0), so on mobile the backward fold starts off-page and the
+  // page slides in instead of folding. Mirror flipNext's geometry by adding rect.left.
+  // In landscape rect.left===0, so this is identical to the original (no desktop regression).
+  // Guarded: no-ops if the (version-pinned) internals ever change.
+  const fc = pf.flipController;
+  if (fc && fc.render && typeof fc.flip === 'function') {
+    fc.flipPrev = function (corner) {
+      const r = this.render.getRect();
+      this.flip({ x: r.left + 10, y: corner === 'top' ? 1 : r.height - 2 });
+    };
+  }
+
   pf.on('changeState', (e) => { if (e.data === 'flipping') playFlip(); });
   let lock = false;
   bookEl.addEventListener('wheel', (e) => {
