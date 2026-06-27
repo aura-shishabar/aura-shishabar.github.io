@@ -4,7 +4,7 @@ export function escapeHtml(s) {
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-const MEDI = '<div class="medi"><div class="m">AU</div></div>';
+const MEDI = '<img class="medi-logo" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
 const LOGO_BIG = '<img class="logo logo-lg" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
 const LOGO_SM = '<img class="logo logo-sm" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
 
