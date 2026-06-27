@@ -5,6 +5,8 @@ export function escapeHtml(s) {
 }
 
 const MEDI = '<div class="medi"><div class="m">AU</div></div>';
+const LOGO_BIG = '<img class="logo logo-lg" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
+const LOGO_SM = '<img class="logo logo-sm" src="assets/logo.jpeg?v=1" alt="AURA Shishabar">';
 
 function imgFor(url, name, cls, w, h) {
   if (!url) return '';
@@ -14,14 +16,14 @@ function imgFor(url, name, cls, w, h) {
 
 export function renderCover() {
   return `<div class="page page-cover" data-density="hard"><div class="pg cover">` +
-    `<div class="medal"><div class="mk">AURA</div><div class="sb">SHISHABAR</div></div>` +
+    LOGO_BIG +
     `<div class="cap">Getränke &amp; Shishakarte</div>` +
     `<div class="tap">scroll · drag · swipe</div></div></div>`;
 }
 
 export function renderBack() {
   return `<div class="page page-cover" data-density="hard"><div class="pg cover">` +
-    `<div class="medal"><div class="mk">AURA</div><div class="sb">SHISHABAR</div></div>` +
+    LOGO_BIG +
     `<div class="cap">Vielen Dank</div></div></div>`;
 }
 
@@ -45,7 +47,7 @@ export function renderIndex(menu, helpers) {
     ? `<div class="toprow">${top.map(c => circle(c, pageIndex(c))).join('')}</div>` : '';
   const gridHtml = `<div class="grid grid-c${cols}">${rest.map(c => circle(c, pageIndex(c))).join('')}</div>`;
   return `<div class="page"><div class="pg home">` +
-    `<div class="medal"><div class="mk">AURA</div><div class="sb">SHISHABAR</div></div>` +
+    LOGO_SM +
     `<div class="hti">WÄHLE EINE KATEGORIE</div>${feat}${topHtml}${gridHtml}</div></div>`;
 }
 
