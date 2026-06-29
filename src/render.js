@@ -46,7 +46,7 @@ export function renderIndex(menu, helpers) {
   const topHtml = top.length
     ? `<div class="toprow">${top.map(c => circle(c, pageIndex(c))).join('')}</div>` : '';
   const gridHtml = `<div class="grid grid-c${cols}">${rest.map(c => circle(c, pageIndex(c))).join('')}</div>`;
-  return `<div class="page" data-density="hard"><div class="pg home">` +
+  return `<div class="page"><div class="pg home">` +
     LOGO_SM +
     `<div class="hti">WÄHLE EINE KATEGORIE</div>${feat}${topHtml}${gridHtml}</div></div>`;
 }
@@ -69,7 +69,7 @@ export function renderCategoryPage(cat) {
         `${it.description ? `<div class="ds">${escapeHtml(it.description)}</div>` : ''}</div>`).join('') +
       `</div>`;
   }
-  return `<div class="page" data-density="hard"><div class="pg">${photo}<div class="vign"></div>` +
+  return `<div class="page"><div class="pg">${photo}<div class="vign"></div>` +
     `<div class="phead">${MEDI}<span class="backpill" data-jump="1">‹ ZURÜCK ZUR STARTSEITE</span>${MEDI}</div>` +
     `<div class="ttl">${escapeHtml(cat.name)}</div>${price}${body}</div></div>`;
 }
