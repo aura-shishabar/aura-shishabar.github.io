@@ -5,7 +5,7 @@ import { parseCsv } from './csv.js';
 import { buildMenu } from './model.js';
 import { pickColumns, splitTopRemainder } from './layout.js';
 import { renderPages } from './render.js?v=7';
-import { initFlipbook } from './flip.js?v=9';
+import { initFlipbook } from './flip.js?v=10';
 
 async function loadMenu() {
   if (CONFIG.sheetId) {

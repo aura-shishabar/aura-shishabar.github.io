@@ -18,6 +18,20 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     usePortrait: single, mobileScrollSupport: true, drawShadow: false, flippingTime: 600
   });
   pf.loadFromHTML(bookEl.querySelectorAll('.page'));
+
+  // StPageFlip turns the page on ANY plain tap: its userStop runs `flip(clickPos)` whenever the
+  // gesture wasn't a drag. That stacks with our own [data-jump] navigation below and overshoots
+  // by one (tap SHISHA → lands on COCKTAILS). Suppress the tap-to-flip while keeping swipe/drag
+  // (stopMove on real moves). Guarded; property names pinned to page-flip@2.0.7.
+  if (typeof pf.userStop === 'function') {
+    pf.userStop = function (point, skip) {
+      if (this.isUserTouch) {
+        this.isUserTouch = false;
+        if (!skip && this.isUserMove && this.flipController) this.flipController.stopMove();
+      }
+    };
+  }
+
   pf.on('changeState', (e) => { if (e.data === 'flipping') playFlip(); });
   let lock = false;
   bookEl.addEventListener('wheel', (e) => {
