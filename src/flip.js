@@ -12,7 +12,7 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
   const ph = Math.round(pw * 1.5);
   const pf = new PF(bookEl, {
     width: pw, height: ph, size: 'fixed', showCover: true,
-    usePortrait: single, mobileScrollSupport: false, drawShadow: false, flippingTime: 600
+    usePortrait: single, mobileScrollSupport: false, disableFlipByClick: true, drawShadow: false, flippingTime: 600
   });
   pf.loadFromHTML(bookEl.querySelectorAll('.page'));
 
@@ -32,6 +32,22 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     };
   }
 
+  // Portrait backward-flip "slide", part 2. In portrait + BACK the engine assigns BOTH the
+  // flipping page and the bottom page to pages[e-1] (the incoming page), so the current page is
+  // never drawn beneath the turn and the incoming page wipes in over nothing. Return the current
+  // page as the bottom page for portrait+BACK so the incoming page folds *over* it. Combined with
+  // the drawBottomPage override above, a backward turn now folds like a forward turn.
+  const pc = pf.getPageCollection && pf.getPageCollection();
+  if (pc && typeof pc.getBottomPage === 'function' && pc.render && pc.render.getOrientation) {
+    const origGetBottom = pc.getBottomPage.bind(pc);
+    pc.getBottomPage = function (dir) {
+      if (this.render.getOrientation() === 'portrait' && dir === 1 /* FlipDirection.BACK */) {
+        return this.pages[this.currentSpreadIndex] || origGetBottom(dir);
+      }
+      return origGetBottom(dir);
+    };
+  }
+
   pf.on('changeState', (e) => { if (e.data === 'flipping') playFlip(); });
   let lock = false;
   bookEl.addEventListener('wheel', (e) => {
@@ -44,5 +60,22 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     const j = e.target.closest('[data-jump]');
     if (j) pf.flip(parseInt(j.getAttribute('data-jump'), 10));
   });
+  // On touch, mobileScrollSupport:false makes the engine preventDefault() touchstart, which
+  // suppresses the synthesized click — so the click handler above never fires on a phone, and
+  // tapping a category did nothing. Detect a stationary tap and run the same data-jump jump;
+  // real drags/swipes set tMoved and fall through to the engine's flip handling.
+  let txs = 0, tys = 0, tMoved = false;
+  bookEl.addEventListener('touchstart', (e) => {
+    const t = e.changedTouches[0]; txs = t.clientX; tys = t.clientY; tMoved = false;
+  }, { passive: true });
+  bookEl.addEventListener('touchmove', (e) => {
+    const t = e.changedTouches[0];
+    if (Math.abs(t.clientX - txs) > 10 || Math.abs(t.clientY - tys) > 10) tMoved = true;
+  }, { passive: true });
+  bookEl.addEventListener('touchend', (e) => {
+    if (tMoved) return;
+    const j = e.target.closest && e.target.closest('[data-jump]');
+    if (j) { e.preventDefault(); pf.flip(parseInt(j.getAttribute('data-jump'), 10)); }
+  }, { passive: false });
   return pf;
 }
