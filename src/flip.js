@@ -6,7 +6,8 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
   const PF = (window.St && window.St.PageFlip) ? window.St.PageFlip : window.PageFlip;
   if (!PF) throw new Error('StPageFlip not loaded');
   const iw = Math.max(window.innerWidth || 0, 320);
-  const single = iw < (opts.singleBreakpoint || 700);
+  const _mode = (typeof location !== 'undefined' && location.search) ? new URLSearchParams(location.search).get('mode') : '';
+  const single = _mode === 'single' ? true : (_mode === 'two' ? false : iw < (opts.singleBreakpoint || 700));
   const wide = Math.min(iw - 24, opts.maxWidth || 860);
   const pw = Math.max(single ? Math.min(iw - 28, 440) : Math.floor(wide / 2), 200);
   const ph = Math.round(pw * 1.5);
@@ -77,5 +78,6 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     const j = e.target.closest && e.target.closest('[data-jump]');
     if (j) { e.preventDefault(); pf.flip(parseInt(j.getAttribute('data-jump'), 10)); }
   }, { passive: false });
+  try { window.__pf = pf; window.__single = single; } catch (e) { /* expose for QA */ }
   return pf;
 }
