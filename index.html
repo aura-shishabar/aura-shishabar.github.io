@@ -5,11 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AURA Shishabar — Menü</title>
   <link rel="icon" href="assets/logo.jpeg">
-  <link rel="stylesheet" href="./style.css?v=4">
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
+  <nav id="toolbar" aria-label="Menü-Steuerung">
+    <button data-act="first" title="Erste Seite" aria-label="Erste Seite"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+    <button data-act="prev" title="Zurück" aria-label="Zurück"><svg viewBox="0 0 24 24"><path d="M16 5v14L5 12z"/></svg></button>
+    <button data-act="home" title="Kategorien" aria-label="Startseite"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-9h3L12 2 2 11h3v9z"/></svg></button>
+    <button data-act="next" title="Weiter" aria-label="Weiter"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    <button data-act="last" title="Letzte Seite" aria-label="Letzte Seite"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg></button>
+    <span class="sep"></span>
+    <button data-act="mute" class="mute" title="Ton an/aus" aria-label="Ton an/aus"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9z"/><path class="wave" d="M14 7.97a4.5 4.5 0 0 1 0 8.05z"/><path class="slash" d="M3.5 3.5 20.5 20.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+    <button data-act="full" title="Vollbild" aria-label="Vollbild"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
+  </nav>
   <div id="bookwrap"><div id="book"></div></div>
   <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
-  <script type="module" src="./src/main.js?v=11"></script>
+  <script type="module" src="./src/main.js?v=12"></script>
 </body>
 </html>

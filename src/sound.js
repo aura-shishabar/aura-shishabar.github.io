@@ -11,7 +11,12 @@ try {
   /* ignore */
 }
 
+let muted = false;
+export function isMuted() { return muted; }
+export function toggleMute() { muted = !muted; return muted; }
+
 export function playFlip() {
+  if (muted) return;
   try {
     const a = new Audio(SRC);
     a.volume = 0.55;

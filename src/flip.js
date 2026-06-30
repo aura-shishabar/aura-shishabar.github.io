@@ -1,5 +1,34 @@
 // src/flip.js — wires StPageFlip (CDN global) to the rendered pages.
-import { playFlip } from './sound.js';
+import { playFlip, toggleMute, isMuted } from './sound.js?v=2';
+
+function toggleFullscreen() {
+  const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+  if (!fsEl) {
+    const el = document.documentElement;
+    (el.requestFullscreen || el.webkitRequestFullscreen || function () {}).call(el);
+  } else {
+    (document.exitFullscreen || document.webkitExitFullscreen || function () {}).call(document);
+  }
+}
+
+function wireToolbar(pf) {
+  const tb = document.getElementById('toolbar');
+  if (!tb) return;
+  const acts = {
+    first: () => pf.flip(0),
+    prev: () => pf.flipPrev(),
+    home: () => pf.flip(1),
+    next: () => pf.flipNext(),
+    last: () => pf.flip(Math.max(0, pf.getPageCount() - 1)),
+    mute: (b) => b.classList.toggle('muted', toggleMute()),
+    full: () => toggleFullscreen(),
+  };
+  tb.querySelectorAll('button[data-act]').forEach((b) => {
+    b.addEventListener('click', () => { const f = acts[b.dataset.act]; if (f) f(b); });
+  });
+  const mb = tb.querySelector('.mute');
+  if (mb) mb.classList.toggle('muted', isMuted());
+}
 
 export function initFlipbook(bookEl, pagesHtml, opts = {}) {
   bookEl.innerHTML = pagesHtml.join('');
@@ -44,6 +73,7 @@ export function initFlipbook(bookEl, pagesHtml, opts = {}) {
     const j = e.target.closest('[data-jump]');
     if (j) pf.flip(parseInt(j.getAttribute('data-jump'), 10));
   });
+  wireToolbar(pf);
   try { window.__pf = pf; } catch (e) { /* exposed for QA */ }
   return pf;
 }
