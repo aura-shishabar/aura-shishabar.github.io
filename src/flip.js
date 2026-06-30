@@ -28,6 +28,10 @@ function wireToolbar(pf) {
   });
   const mb = tb.querySelector('.mute');
   if (mb) mb.classList.toggle('muted', isMuted());
+  // iPhone Safari has no Fullscreen API for page elements — hide the button where it'd do nothing.
+  const fullBtn = tb.querySelector('[data-act="full"]');
+  const el = document.documentElement;
+  if (fullBtn && !(el.requestFullscreen || el.webkitRequestFullscreen)) fullBtn.style.display = 'none';
 }
 
 export function initFlipbook(bookEl, pagesHtml, opts = {}) {
